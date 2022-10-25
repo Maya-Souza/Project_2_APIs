@@ -1,6 +1,8 @@
 # Enriching a database through web scraping and API
+#### Mayara Souza
+&nbsp;
 
-Food prices vary constantly year after year, but is there a relationship between their nutritional values - more specifically, their calories - and how much they vary in a certain period of time? What about the correlation between food prices variation and the variation in minimum wage? Do they normally go hand in hand?  
+Food prices vary constantly year after year, but **is there a relationship between their nutritional values - more specifically, their calories - and how much they vary in a certain period of time? What about the correlation between food prices variation and the variation in minimum wage? Do they normally go hand in hand?**  
 
 This analysis tries to answer these questions by using data from Turkey as its subject. 
 
@@ -12,7 +14,7 @@ The analytical process can be separated in the following parts:
 2. Web scraping from a specific website (https://countryeconomy.com/national-minimum-wage/turkey) with the objective of getting a dataframe displaying the minimum wage variation in Turkey out of the table below;
    ![](images/web_scraping_table.jpg)
 
-3. Merging these two dataframes in order to manipulate the data; 
+3. Merging these two dataframes in order to manipulate and analyse the data; 
    &nbsp;
 4. Use of an API (https://rapidapi.com/hefesto-technologies-hefesto-technologies-default/api/food-nutrition-information/) that gathers the nutritional information of hundreds of different products. The objective was to look for a correlation between caloric value and price variation;
    &nbsp;
@@ -35,7 +37,7 @@ After merging the two dataframes and cleaning the columns so they would make mor
 Here, we only have the price variation data for Turkey along with its minimum wage variation, everything categorized by years (2015 to 2021).
 
 &nbsp; 
-The next step was to focus on the total variation for the period. For this, I created a different subset where the products had the percentual variation from 2021 - 2015:
+The next step was to focus on the total price variation for each product in the period of 2015 to 2021. For this, I created a different subset where the products had the percentual variation in this period:
 &nbsp; 
 ![](images/price_var.jpg)
 
@@ -43,7 +45,7 @@ From there, it was a matter of creating two more subsets to register the top 10 
 
 ### Part 4 - API
 
-Having the list of foods that will be the analysed (top 10 and bottom 10), I passed them through the API in order to get their unique ID. For each ID, I made a new request to the API to get the nutritional information for each product. I focused on calories, sugar and fat, but in order to simplify the analysis - since I am not a dietitian - I used only calories for reference in the graphs.
+Having the list of foods that would be the analysed (top 10 and bottom 10), I passed them through the API in order to get their unique ID. For each ID, I made a new request to the API to get the nutritional information for each product. I focused on calories, sugar and fats, but in order to simplify the analysis - since I am not a dietitian - I used only calories for reference in the graphs.
 &nbsp;
 ![](images/api_df.jpg)
 
@@ -56,7 +58,7 @@ In order to plot these graphs:
 - I used the subset 'food_salary_variation_top' which takes the 10 products that most varied in price between 2015 and 2021, their percentual variation and the variation of minimum wage in the same period (a single value).  
 
 - I used the subset 'food_salary_variation_bottom' that takes the 10 products that least varied in price between 2015 and 2021, their percentual variation and the variation of minimum wage in the same period (a single value).
-- 
+  
 ![](images/fig1.jpeg)
 
 ![](images/fig5.jpeg)
@@ -104,5 +106,6 @@ In order to plot this graph:
 **Observations:**
 
 - The relationship between calories and variation in price is not conclusive. Some less caloric foods (usually read as 'healthy', such as vegetables and fish) seem to variate more in price than the more caloric ones (such as oil and sugar). This could implicate in a difficulty of access to healthier foods in lower classes. However, this correlation is not true for all foods and, therefore, it is not possible to conclude that it exists.  
+- The data did not have a big enough variety of healthy/unhealthy products either. Therefore, in order to conduct a precise analysis we would need price variation for different foods - specially processed and ultra processed ones.
 
 - A better way to visualize this relationship would be by comparing the calories and the price variation on the same graph.
